@@ -1,0 +1,13 @@
+{
+	"$schema": "../../node_modules/wrangler/config-schema.json",
+	"name": "mcp-hello",
+	"main": "src/index.ts",
+	"compatibility_date": "2025-03-10",
+	"compatibility_flags": ["nodejs_compat"],
+	"vars": {
+		// The URL you paste into claude.ai. Tokens are bound to it. Filled in by scripts/provision.sh.
+		"MCP_RESOURCE": "https://mcp-hello.YOUR_SUBDOMAIN.workers.dev/mcp"
+	},
+	"kv_namespaces": [{ "binding": "OAUTH_KV", "id": "YOUR_KV_ID" }],
+	"observability": { "enabled": true }
+}

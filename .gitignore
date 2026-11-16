@@ -1,0 +1,13 @@
+node_modules/
+.wrangler/
+.dev.vars
+.env*
+*.tsbuildinfo
+
+# Google OAuth client JSON and generated data dumps never go into git
+client_secret*.json
+*.sql
+!servers/*/migrations/*.sql
+
+# personal scratchpad
+TODO.md

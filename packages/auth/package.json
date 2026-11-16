@@ -1,0 +1,17 @@
+{
+	"name": "@remote-mcp/auth",
+	"version": "0.1.0",
+	"private": true,
+	"type": "module",
+	"main": "src/index.ts",
+	"types": "src/index.ts",
+	"scripts": {
+		"type-check": "tsc --noEmit"
+	},
+	"dependencies": {
+		"@cloudflare/workers-oauth-provider": "1.2.4",
+		"@modelcontextprotocol/server": "2.3.1",
+		"agents": "0.29.0",
+		"hono": "^4.13.16"
+	}
+}
