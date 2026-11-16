@@ -53,6 +53,6 @@ cat <<EOF
 provisioned servers/$server
 next:
   1. Google OAuth client -> add redirect URI ${resource%/mcp}/callback   (docs/google-oauth.md)
-  2. scripts/set-secrets.sh $server <client.json> <allowed-emails>
+  2. scripts/set-secrets.sh $server <client.json>   (prompts for allowed emails)
   3. claude.ai -> Settings -> Connectors -> $resource
 EOF
