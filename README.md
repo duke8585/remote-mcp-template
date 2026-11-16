@@ -17,7 +17,7 @@ export default withGoogleAuth(() => {
 
 ## What I use it for
 
-- **A large dbt project.** A big analytics codebase with all its models and docs is far more than a Claude Project's knowledge can hold, and stuffing in a subset loses the rest. As an MCP server with search and read tools, Claude looks up the handful of models a question needs, across the whole project.
+- **A DNA sequencing file.** About 17 MB of raw data is far more than a Claude Project's knowledge can hold, and pasting in a slice loses the rest. As an MCP server with search and read tools, Claude looks up just the entries a question needs, across the whole file.
 - **My LLM wiki.** My personal knowledge base lives on a Mac mini at home, which Claude on my phone cannot reach. A Worker serves a synced copy from D1 with full-text search, plus a capture tool that writes new notes back. Now it is one connector away, from anywhere.
 - **[Fridge Door](https://github.com/duke8585/fridge-door).** A household recipe app that exposes its own MCP server, so Claude can search recipes and fill the shopping list. It uses the same libraries with the app's own login instead of Google, a good reference if you want to bolt MCP onto an existing app.
 
