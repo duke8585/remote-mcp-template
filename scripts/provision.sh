@@ -6,7 +6,8 @@
 #   YOUR_SUBDOMAIN -> <workers-subdomain>
 #   YOUR_KV_ID     -> a new KV namespace for OAuth state
 #   YOUR_D1_ID     -> a new D1 database, migrations applied (only if the server has one)
-# Only placeholders still present are touched, so re-running after a failure is safe.
+# Only placeholders still present are filled, and D1 migrations are applied on every run,
+# so re-running after a failure (or after adding a migration) is safe.
 # Needs `npx wrangler login` first.
 set -euo pipefail
 
@@ -36,6 +37,12 @@ if has YOUR_D1_ID; then
   [[ -n "$id" ]] || { echo "could not parse D1 id from wrangler output:" >&2; echo "$out" >&2; exit 1; }
   fill YOUR_D1_ID "$id"
   echo "D1 database $db: $id"
+fi
+
+# Every run, not only on creation: wrangler skips applied migrations, so a failed or
+# declined apply is retried, and new migration files get applied.
+if grep -q '"d1_databases"' "$cfg"; then
+  db=$(python3 -I -c 'import re; print(re.search(r"\"database_name\":\s*\"([^\"]+)\"", open("wrangler.jsonc").read()).group(1))')
   npx wrangler d1 migrations apply "$db" --remote
 fi
 

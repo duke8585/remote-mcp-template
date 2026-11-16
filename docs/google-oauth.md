@@ -47,13 +47,19 @@ Keep the file out of the repo (`client_secret*.json` is gitignored) and delete i
 ## 4. Hand it to the Worker
 
 ```text
-scripts/set-secrets.sh hello ~/Downloads/client_secret_XXXX.json you@gmail.com
+scripts/set-secrets.sh hello ~/Downloads/client_secret_XXXX.json
 ```
 
-The script warns if the JSON does not list the server's redirect URI, deploys the Worker, and pipes `GOOGLE_CLIENT_ID`, `GOOGLE_CLIENT_SECRET`, `ALLOWED_EMAILS` and a random `COOKIE_ENCRYPTION_KEY` into `wrangler secret put` over stdin, so no value lands in your shell history.
+The script warns if the JSON does not list the server's redirect URI, prompts for the allowed emails, deploys the Worker, and pipes `GOOGLE_CLIENT_ID`, `GOOGLE_CLIENT_SECRET`, `ALLOWED_EMAILS` and a random `CONSENT_SECRET` into `wrangler secret put` over stdin, so no value lands in your shell history or process list.
 
 If you add redirect URIs later, the downloaded JSON goes stale, so the warning can fire even though the console is correct.
 In that case, check the console and ignore the warning.
+
+## 5. Local development (optional)
+
+Add `http://localhost:8787/callback` as another redirect URI on the same client.
+Google allows plain `http` for `localhost`.
+Then copy `servers/<server>/.dev.vars.example` to `.dev.vars` and fill in the client id and secret (see the README's local development section).
 
 ## Troubleshooting
 
@@ -61,5 +67,5 @@ In that case, check the console and ignore the warning.
 |---|---|
 | Google shows `Error 400: redirect_uri_mismatch` | The `/callback` URI for this server is missing or mistyped in the client. Changes can take a few minutes to apply |
 | Google shows `Error 403: access_denied` | The account is not a test user (step 2) |
-| Worker answers `Forbidden: this Google account is not allowed` | Google login worked, but the email is not in `ALLOWED_EMAILS`. `npx wrangler tail` shows `login rejected` with the email |
+| claude.ai reports `access_denied` right after the Google login | Google login worked, but the email is not in `ALLOWED_EMAILS`. `npx wrangler tail` shows `login rejected` with the email. Fix it with `npx wrangler secret put ALLOWED_EMAILS` |
 | claude.ai says it cannot connect | Run `scripts/smoke.sh <server>`. `/mcp` must answer 401, and the URL in claude.ai must equal `MCP_RESOURCE` exactly |

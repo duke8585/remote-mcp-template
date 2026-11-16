@@ -1,0 +1,8 @@
+# Copy to .dev.vars (gitignored) for `npm run dev`. Overrides wrangler.jsonc vars and stands in for secrets.
+# Add http://localhost:8787/callback as a redirect URI in your Google OAuth client.
+MCP_RESOURCE=http://localhost:8787/mcp
+GOOGLE_CLIENT_ID=xxxx.apps.googleusercontent.com
+GOOGLE_CLIENT_SECRET=xxxx
+ALLOWED_EMAILS=you@gmail.com
+# openssl rand -hex 32
+CONSENT_SECRET=replace-with-64-hex-chars-replace-with-64-hex-chars-replace-with-6

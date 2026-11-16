@@ -11,7 +11,7 @@ export interface AuthEnv {
 	MCP_RESOURCE: string; // public URL of /mcp, from wrangler.jsonc
 	GOOGLE_CLIENT_ID: string; // secret
 	GOOGLE_CLIENT_SECRET: string; // secret
-	COOKIE_ENCRYPTION_KEY: string; // secret, random
+	CONSENT_SECRET: string; // secret, random, signs the "approved this client" cookie
 	ALLOWED_EMAILS: string; // secret, comma-separated
 }
 
